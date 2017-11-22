@@ -1,0 +1,62 @@
+{
+  "languageModel": {
+    "intents": [
+      {
+        "name": "AMAZON.CancelIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.HelpIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.PauseIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.StartOverIntent",
+        "samples": []
+      },
+      {
+        "name": "AMAZON.StopIntent",
+        "samples": []
+      },
+      {
+        "name": "AnswerIntent",
+        "samples": [
+          "{PlayerName}",
+          "{SquadNumber}",
+          "tell me about {PlayerName}",
+          "tell me about player with number {SquadNumber}",
+          "what do you know about {PlayerName}",
+          "what do you know about number {SquadNumber}",
+          "{PlayerName} information",
+          "number {SquadNumber} information"
+        ],
+        "slots": [
+          {
+            "name": "PlayerName",
+            "type": "AMAZON.Person"
+          },
+          {
+            "name": "SquadNumber",
+            "type": "AMAZON.NUMBER"
+          }
+        ]
+      },
+      {
+        "name": "QuizIntent",
+        "samples": [
+          "start a quiz",
+          "start a quiz game",
+          "and start a quiz",
+          "and quiz me",
+          "for a quiz",
+          "a quiz"
+        ],
+        "slots": []
+      }
+    ],
+    "invocationName": "hertha club"
+  }
+}

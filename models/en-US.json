@@ -1,0 +1,62 @@
+{
+  "intents": [
+    {
+      "name": "AMAZON.CancelIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.HelpIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.PauseIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StartOverIntent",
+      "samples": []
+    },
+    {
+      "name": "AMAZON.StopIntent",
+      "samples": []
+    },
+    {
+      "name": "AnswerIntent",
+      "samples": [
+        "{PlayerName}",
+        "{SquadNumber}",
+        "tell me about {PlayerName}",
+        "tell me about player with number {SquadNumber}",
+        "what do you know about {PlayerName}",
+        "what do you know about {SquadNumber}",
+        "{PlayerName} information",
+        "{SquadNumber} information"
+      ],
+      "slots": [
+        {
+          "name": "PlayerName",
+          "type": "AMAZON.Person",
+          "samples": []
+        },
+        {
+          "name": "SquadNumber",
+          "type": "AMAZON.NUMBER",
+          "samples": []
+        }
+      ]
+    },
+    {
+      "name": "QuizIntent",
+      "samples": [
+        "start a quiz",
+        "start a quiz game",
+        "and start a quiz",
+        "and quiz me",
+        "for a quiz",
+        "a quiz"
+      ],
+      "slots": []
+    }
+  ],
+  "types": []
+}
