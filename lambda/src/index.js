@@ -2,29 +2,11 @@
 
 'use strict';
 const Alexa = require('alexa-sdk');
+const { data, speechConsCorrect, speechConsWrong} = require('./data');
 
 // Replace with your app ID (OPTIONAL).  You can find this value at the top of your skill's page on http://developer.amazon.com.
 // Make sure to enclose your value in quotes, like this:  const APP_ID = "amzn1.ask.skill.bb4045e6-b3e8-4133-b650-72923c5980f1";
 const APP_ID = undefined;
-
-//=========================================================================================================================================
-// Data
-//=========================================================================================================================================
-
-const data = [
-    { PlayerName: "Thomas Kraft", Position: "Goalkeeper", NationalTeam: "Germany", Age: 29, YearOfBirth: 1988, SquadNumber: 1 },
-    { PlayerName: "Peter Pekarík", Position: "Defender", NationalTeam: "Slovakia", Age: 31, YearOfBirth: 1986, SquadNumber: 2 },
-    { PlayerName: "Per Ciljan Skjelbred", Position: "Midfielder", NationalTeam: "Norway", Age: 30, YearOfBirth: 1987, SquadNumber: 3 }
-]
-
-// This is a list of positive speechcons that this skill will use when a user gets a correct answer.
-const speechConsCorrect = ["All righty", "Bam", "Bingo", "Boom", "Bravo", "Cheers", "Dynomite",
-    "Hip hip hooray", "Hurrah", "Hurray", "Huzzah", "Oh dear.  Just kidding.  Hurray", "Kaboom", "Oh snap", "Phew",
-    "Well done", "Whee", "Woo hoo", "Yay"];
-
-// This is a list of negative speechcons that this skill will use when a user gets an incorrect answer.
-const speechConsWrong = ["Argh", "Aw man", "Bummer", "D'oh", "Mamma mia", "Oh boy", "Oh dear", "Oof", "Ouch", "Ruh roh", "Shucks",
-    "Uh oh", "Wah wah", "Whoops a daisy", "Yikes"];
 
 //=========================================================================================================================================
 // Predefined response messages
@@ -34,23 +16,23 @@ const speechConsWrong = ["Argh", "Aw man", "Bummer", "D'oh", "Mamma mia", "Oh bo
 const NUMBER_OF_QUIZ_QUESTIONS = 5;
 
 // This is the welcome message for when a user starts the skill without a specific intent.
-const WELCOME_MESSAGE = "Welcome to the Hertha Quiz Game! You can ask me about Hertha Football Club and their players, or you can ask me to start a players quiz.  What would you like to do?";
+const WELCOME_MESSAGE = "Welcome to the Football Club Game! You can ask me about football clubs and their players, or you can ask me to start a players quiz.  What would you like to do?";
 
 // This is the message a user will hear when they start a quiz.
-const START_QUIZ_MESSAGE = `OK.  I will ask you ${NUMBER_OF_QUIZ_QUESTIONS} questions about the Hertha players.`;
+const START_QUIZ_MESSAGE = `OK. I will ask you ${NUMBER_OF_QUIZ_QUESTIONS} questions about the football players.`;
 
 // This is the message a user will hear when they try to cancel or stop the skill, or when they finish a quiz.
-const EXIT_SKILL_MESSAGE = `Thank you for playing the Hertha Quiz Game!  Let's play again soon!`;
+const EXIT_SKILL_MESSAGE = `Thank you for playing the Football Club Game!  Let's play again soon!`;
 
 // This is the message a user will hear after they ask (and hear) about a specific data element.
 const REPROMPT_SPEECH = `Which other player would you like to know about?`;
 
 // This is the message a user will hear when they ask Alexa for help in your skill.
-const HELP_MESSAGE = `I know lots of things about the Hertha.  You can ask me about a club history, and I'll tell you what I know.  You can also test your knowledge by asking me to start a quiz.  What would you like to do?`;
+const HELP_MESSAGE = `I know lots of things about the football. You can ask me about a club history, and I'll tell you what I know.  You can also test your knowledge by asking me to start a quiz.  What would you like to do?`;
 
 // This function returns a descriptive sentence about your data.  Before a user starts a quiz, they can ask about a specific data element
 function getSpeechDescription(player) {
-    let sentence = `${player.PlayerName} is playing at ${player.Position} position. This ${player.Age} years old player is coming from ${player.NationalTeam} national team. His squad number is ${player.SquadNumber}. I've added ${player.PlayerName} to your Alexa app. Which other Hertha player would you like to know about?`;
+    let sentence = `${player.PlayerName} is playing at ${player.Position} position. This ${player.Age} years old player is coming from ${player.NationalTeam} national team. Currently he is playing for ${player.Club} and his squad number is ${player.SquadNumber}. I've added ${player.PlayerName} to your Alexa app. Which other player would you like to know about?`;
     return sentence;
 }
 
@@ -89,7 +71,7 @@ function getFinalScore(score, counter) {
 
 //If you don't want to use cards in your skill, set the USE_CARDS_FLAG to false.  If you set it to true, you will need an image for each
 //item in your data.
-const USE_CARDS_FLAG = false;
+const USE_CARDS_FLAG = true;
 
 //This is what your card title will be.  For our example, we use the name of the state the user requested.
 function getCardTitle(item) {
@@ -99,12 +81,12 @@ function getCardTitle(item) {
 //This is the small version of the card image.  We use our data as the naming convention for our images so that we can dynamically
 //generate the URL to the image.  The small image should be 720x400 in dimension.
 function getSmallImage(item) {
-    return "ENTER_YOUR_IMAGE_URL_HERE" + item.SquadNumber + "._TTH_.png";
+    return `https://loremflickr.com/720/400?random=${item.SquadNumber}`;
 }
 
 //This is the large version of the card image.  It should be 1200x800 pixels in dimension.
 function getLargeImage(item) {
-    return "ENTER_YOUR_IMAGE_URL_HERE" + item.SquadNumber + "._TTH_.png";
+    return `https://loremflickr.com/1200/800?random=${item.SquadNumber}`;
 }
 
 //=========================================================================================================================================
@@ -337,7 +319,7 @@ function formatCasing(key) {
 function getTextDescription(item) {
     let text = "";
     for (let key in item) {
-        text += `${formatCasing(key)}: ${item[key]}\n`;
+        text += `<p>${formatCasing(key)}<p>: ${item[key]}\n`;
     }
     return text;
 }
